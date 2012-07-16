@@ -1,0 +1,40 @@
+CXX := $(shell $(R_HOME)/bin/R CMD config CXX)
+CPPFLAGS := $(shell $(R_HOME)/bin/R CMD config CPPFLAGS) \
+            -I"D:/Rcompile/CRANpkg/extralibs215/local215/include"
+LDFLAGS := $(shell $(R_HOME)/bin/R CMD config LDFLAGS) \
+           -L"D:/Rcompile/CRANpkg/extralibs215/local215/lib" \
+           -L"D:/Rcompile/CRANpkg/extralibs215/local215/lib/i386" \
+           -L"D:/Rcompile/CRANpkg/extralibs215/local215/lib/x64"
+LIBS = -lgsl -lgslcblas
+
+SRCFILES = Classes/CM.cc \
+           Classes/Double_Matrices.cc \
+           Classes/Double_Matrices_cont.cc \
+           Classes/DR.cc \
+           Classes/g_AdMH.cc \
+           Classes/Int_Matrices.cc \
+           Classes/Int_Matrices_var_dim.cc \
+           Classes/Move_monitor.cc \
+           Classes/Prior_param.cc \
+           Classes/String_Matrices.cc \
+           Classes/Temperatures.cc \
+           Main/GUESS.cc \
+           Routines/cond_post.cc \
+           Routines/dyn_name.cc \
+           Routines/matrix_handling.cc \
+           Routines/moves.cc \
+           Routines/post_processing.cc \
+           Routines/rand.cc \
+           Routines/regression.cc \
+           Routines/xml_file_read.cc \
+           Routines/xml_file_write.cc
+
+all:	clean GUESS
+
+clean:
+	rm -f ../exec/GUESS
+
+GUESS:
+	mkdir -p ../exec
+	$(CXX) $(CPPFLAGS) $(SRCFILES) -o ../exec/GUESS.exe $(LDFLAGS) $(LIBS)
+
