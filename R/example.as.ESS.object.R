@@ -1,7 +1,7 @@
 example.as.ESS.object <- function(){
-path.input <- paste(system.file("Input", package="R2GUESS"),"/",sep="")
-path.output <- paste(system.file("Output", package="R2GUESS"),"/",sep="")
-path.par <- paste(system.file("extdata", package="R2GUESS"),"/",sep="")
+path.input <- system.file("Input", package="R2GUESS")
+path.output <- system.file("Output", package="R2GUESS")
+path.par <- system.file("extdata", package="R2GUESS")
 file.par <- "Par_file_example_Hopx.xml"
 root.file.output <- "Example-GUESS-Y-Hopx"
 label.Y <- c("ADR","Fat","Heart","Kidney")

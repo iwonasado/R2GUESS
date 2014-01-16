@@ -21,17 +21,19 @@
 #ifndef PRIOR_PARAM_H
 #define PRIOR_PARAM_H 1
 
-#include <iostream>
-#include <fstream>
+#include <cmath>
+#include <cstdio>
 #include <cstdlib>
 #include <cstring>
-#include <cstdio>
+#include <fstream>
+#include <iostream>
 #include <vector>
-#include <gsl/gsl_vector.h>
+
 #include <gsl/gsl_sort_vector.h>
-#include <math.h>
-#include "../Routines/matrix_handling.h"
 #include <gsl/gsl_statistics_double.h>
+#include <gsl/gsl_vector.h>
+
+#include "../Routines/matrix_handling.h"
 
 using namespace std;
 

@@ -6,15 +6,15 @@ var.gene <- select.variable
 if(length(var.gene)<2){cat("more than on variable need to be selected")
 mat.sim <- NULL
 }else{
-datax <- data.frame(matrix(scan(file=paste(x$path.input,x$dataX,sep=""),skip=2,sep=""),ncol=x$p,byrow=TRUE))
+datax <- data.frame(matrix(scan(file=file.path(x$path.input,x$dataX),skip=2,sep=""),ncol=x$p,byrow=TRUE))
 if(is.null(labelX)) colnames(datax) <- 1:x$p else colnames(datax) <- labelX
 if(!is.null(x$MAP.file)){
 if(is.data.frame(x$MAP.file)){annot<- x$MAP.file}else{
-annot <- read.table(paste(x$path.input,x$MAP.file,sep=""),header=TRUE)}
+annot <- read.table(file.path(x$path.input,x$MAP.file),header=TRUE)}
 colnames(datax) <- annot[,1]
 }
 
-matY <- data.frame(matrix(scan(file=paste(x$path.input,x$dataY,sep=""),skip=2,sep=""),ncol=x$q,byrow=TRUE))
+matY <- data.frame(matrix(scan(file=file.path(x$path.input,x$dataY),skip=2,sep=""),ncol=x$q,byrow=TRUE))
 
 matX <- datax[,var.gene]
 

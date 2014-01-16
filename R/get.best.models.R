@@ -1,7 +1,7 @@
 get.best.models <- function(path.out,path.in=NULL,file.in,label.X=NULL,p,MAP.file=NULL){
 
 #p number of VARIABLE
-NameBestModel <- paste(path.out,file.in,"_output_best_visited_models.txt",sep="")
+NameBestModel <- file.path(path.out, paste(file.in,"output_best_visited_models.txt",sep="_"))
 
 if(is.null(label.X)) label.X <- 1:p
 
@@ -9,7 +9,7 @@ if(is.null(label.X)) label.X <- 1:p
 if(is.null(MAP.file)){
 BestModels<-list('Rank'=c(),'nVisits'=c(),'FirstVisit'=c(),'nEvalBefore1st'=c(),'ModeSize'=c(),'logCondPost'=c(),'postProb'=c(),'jeffries'=c(),'modelName'=c())}else{
 if(is.data.frame(MAP.file)){VARIABLELabels <- MAP.file}else{
-NameMap.file <- paste(path.in,MAP.file,sep="")
+NameMap.file <- file.path(path.in, MAP.file)
 VARIABLELabels <- read.table(NameMap.file,header=TRUE)}
 
 BestModels<-list('Rank'=c(),'nVisits'=c(),'FirstVisit'=c(),'nEvalBefore1st'=c(),'ModeSize'=c(),'logCondPost'=c(),'postProb'=c(),'jeffries'=c(),'modelPosInX'=c(),'modelCHR'=c(),'modelPosn'=c(),'modelName'=c())
@@ -82,7 +82,7 @@ if(!is.null(MAP.file)){
   }
 }
 
-ModelsWriteName <- paste(path.out,file.in,"_output_best_visited_models.RData",sep="")
+ModelsWriteName <- file.path(path.out, paste(file.in,"output_best_visited_models.RData",sep="_"))
 save(BestModels,file=ModelsWriteName)
 return(BestModels)
 

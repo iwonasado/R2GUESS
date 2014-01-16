@@ -58,9 +58,7 @@
 
 \examples{
 \dontrun{
-##Notrun 
-
-path.output.perm <- paste(getwd(),"/",sep="")
+path.output.perm <- tmpdir()
 path.input.perm <-path.output.perm
 
 cutoff.1 <- FDR.permutation(x=modelY_Hopx,Npermut=6,start.counter=1,

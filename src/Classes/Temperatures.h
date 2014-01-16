@@ -21,17 +21,19 @@
 #ifndef TEMPERATURES_H
 #define TEMPERATURES_H 1
 
-#include <iostream>
-#include <fstream>
+#include <cmath>
+#include <cstdio>
 #include <cstdlib>
 #include <cstring>
-#include <cstdio>
-#include <gsl/gsl_vector.h>
-#include <gsl/gsl_sort_vector.h>
-#include <math.h>
-#include <gsl/gsl_statistics_double.h>
-#include <gsl/gsl_math.h>
+#include <fstream>
+#include <iostream>
 #include <vector>
+
+#include <gsl/gsl_math.h>
+#include <gsl/gsl_sort_vector.h>
+#include <gsl/gsl_statistics_double.h>
+#include <gsl/gsl_vector.h>
+
 using namespace std;
 
 class Temperatures

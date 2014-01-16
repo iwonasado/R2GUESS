@@ -21,15 +21,11 @@
 #include "cond_post.h"
 #include "struc.h"
 #include "rand.h"
-#include <stdlib.h>
+#include <cstdlib>
 
 #if _CUDA_
-#include <cuda.h>
-#include <cuda_runtime_api.h>
-#include <cublas.h>
 #include <cula.h>
 #endif
-
 
 #define DEBUG 0
 
@@ -579,8 +575,8 @@ void computeLogPosterior(double& logMargLik,
 #endif
 
   }else{
-    gsl_matrix *gslEigenVecs;
-    gsl_vector *gslEigenVals;
+    gsl_matrix *gslEigenVecs = NULL;
+    gsl_vector *gslEigenVals = NULL;
     matSGamma=getSGamma(matXGam,matY,lambda,g,gslEigenVecs,gslEigenVals,
                           gPriorFlag,indepPriorFlag,pXGam,nX,pY);
   }
@@ -594,21 +590,20 @@ void computeLogPosterior(double& logMargLik,
     free(vectorEigenVals);
   }
   
-  if(isnan(logMargLik)||std::isinf(logMargLik)){
-    logMargLik=-1000000000;
+  if(!GUESS_isfinite(logMargLik)){
+    logMargLik=-1E9;
   }
 
   double logPGam=getPriorGam(PR,pX,pXGam);
-  if(isnan(logPGam)||std::isinf(logPGam)){
-    logPGam=-1000000000;
+  if(!GUESS_isfinite(logPGam)){
+    logPGam=-1E9;
   }
 
   double logPG=getPriorG(PR,gSampleFlag,g);
-  if(isnan(logPG)||std::isinf(logPG)){
-    logPG=-1000000000;
+  if(!GUESS_isfinite(logPG)){
+    logPG=-1E9;
   }
 
   logPosterior=logPGam + logPG + logMargLik;
- 
 }
 

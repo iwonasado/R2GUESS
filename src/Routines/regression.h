@@ -21,33 +21,32 @@
 #ifndef REGRESSION_H
 #define REGRESSION_H
 
-#include <gsl/gsl_fit.h>
+#include <cmath>
+#include <cstdarg>
+#include <cstddef>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <iostream>
+#include <sstream>
+#include <vector>
+
+#include <gsl/gsl_blas.h>
 #include <gsl/gsl_cdf.h>
+#include <gsl/gsl_fit.h>
+#include <gsl/gsl_linalg.h>
+#include <gsl/gsl_math.h>
+#include <gsl/gsl_matrix.h>
+#include <gsl/gsl_permutation.h>
 #include <gsl/gsl_randist.h>
 #include <gsl/gsl_sort.h>
 #include <gsl/gsl_sort_vector.h>
-#include <gsl/gsl_permutation.h>
-#include <gsl/gsl_matrix.h>
+#include <gsl/gsl_statistics_double.h>
+
 #include "../Classes/Double_Matrices.h"
 #include "../Classes/Double_Matrices_cont.h"
 #include "../Classes/Int_Matrices.h"
 #include "../Routines/matrix_handling.h"
-#include <vector>
-#include <gsl/gsl_math.h>
-#include <gsl/gsl_blas.h>
-#include <gsl/gsl_linalg.h>
-#include <stdlib.h>
-#include <stddef.h>
-#include <stdarg.h>
-#include <string.h>
-#include <stdio.h>
-#include <cstring>
-#include <iostream>
-#include <sstream> 
-#include <cstdarg>
-#include <math.h>
-#include <cmath>
-#include <gsl/gsl_statistics_double.h>
 
 void perform_stepwise_regr(vector < vector <unsigned int> > &Gam_stepregr,
 			   Double_Matrices mat_Y,

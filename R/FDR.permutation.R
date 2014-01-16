@@ -1,6 +1,6 @@
 FDR.permutation <- function(x,path.input=NULL,Npermut,start.counter=1,path.output=NULL,threshold=0.05,nbcpu=NULL,number.cutoff=200) {
 
-root.file.output <- paste("Permut-",x$root.file.output,sep="")
+root.file.output <- paste("Permut",x$root.file.output,sep="-")
 
 if(is.null(path.output)) path.output <- x$path.output else
 {path.output <- path.expand(path.output)}
@@ -8,9 +8,9 @@ if(is.null(path.output)) path.output <- x$path.output else
 if(is.null(path.input)) path.input <- x$path.input else
 {path.input<- path.expand(path.input)}
 
-Y <- read.table(paste(path.expand(x$path.input),x$dataY,sep=""),skip=2)
+Y <- read.table(file.path(path.expand(x$path.input), x$dataY),skip=2)
 
-NameMarg <-  paste(x$path.output,x$root.file.output,"_output_marg_prob_incl.txt",sep="")
+NameMarg <- file.path(x$path.output, paste(x$root.file.output,"output_marg_prob_incl.txt",sep="_"))
 Marg <- read.table(NameMarg,header=TRUE)
 MPI <- Marg[,2]
 MPI.sort <- sort(MPI,decreasing=TRUE)

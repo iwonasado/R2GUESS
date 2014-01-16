@@ -3,7 +3,7 @@ get.sweep.best.model <- function(x,models=1){
   if(class(x)!="ESS") stop("x should be an ESS object")  
   path.output <- x$path.output
   file.in <- x$root.file.output
-  model.history <- paste(path.output,file.in,"_output_models_history.txt",sep="")
+  model.history <- file.path(path.output, paste(file.in,"output_models_history.txt",sep="_"))
   
   Tmpmodel.history <- readLines(model.history)
   
@@ -16,7 +16,7 @@ get.sweep.best.model <- function(x,models=1){
   
   if(!is.null(x$MAP.file)){
     if(is.data.frame(x$MAP.file)){label.X <- as.character(x$MAP.file$SNPName)}else{
-      NameMap.file <- paste(x$path.input,x$MAP.file,sep="")
+      NameMap.file <- file.path(x$path.input,x$MAP.file)
       SNPLabels <- read.table(NameMap.file,header=TRUE,stringsAsFactors = FALSE)
     label.X <- SNPLabels$SNPName
     }

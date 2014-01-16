@@ -19,10 +19,8 @@
 */
 
 #include "dyn_name.h"
-#include "struc.h"
-#include <string>
-#include <iostream>
-#include <sstream> 
+
+using namespace std;
 
 string Get_dyn_name(string File_name,
 		    int Number,

@@ -23,11 +23,6 @@
  * along with GUESS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <string.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <time.h>
-#include <math.h>
 #include "xml_file_read.h"
 
 MaXmlTagRead::MaXmlTagRead(FILE *f)

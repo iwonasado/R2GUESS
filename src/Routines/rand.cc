@@ -21,14 +21,6 @@
 #include "rand.h"
 #include "struc.h"
 
-extern "C" {
-#include <gsl/gsl_vector.h>
-#include <gsl/gsl_matrix.h>
-#include <gsl/gsl_sf_gamma.h>
-#include <gsl/gsl_linalg.h>
-#include <gsl/gsl_sf.h>
-}
-
 using namespace std;
 
 double myrand(gsl_rng *RandomNumberGenerator)
@@ -38,7 +30,7 @@ double myrand(gsl_rng *RandomNumberGenerator)
 
 void smyrand(long seed,gsl_rng *RandomNumberGenerator)
 {
-   gsl_rng_set(RandomNumberGenerator, static_cast< uint32_t >( seed ) );
+   gsl_rng_set(RandomNumberGenerator, seed);
 }
 
 void readRNG(FILE *fRNG,gsl_rng *RandomNumberGenerator){

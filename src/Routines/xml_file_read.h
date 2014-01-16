@@ -31,12 +31,11 @@
 #define MA_CLOSE_FILE_ERROR 15
 #define MA_XML_FILE_ERROR -13
 
-#include <string.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <time.h>
-#include <math.h>
+#include <cmath>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <ctime>
 
 #ifndef Mymax
 #define Mymax(a,b)            (((a) > (b)) ? (a) : (b))
@@ -45,6 +44,8 @@
 #ifndef Mymin
 #define Mymin(a,b)            (((a) < (b)) ? (a) : (b))
 #endif
+
+using namespace std;
 
 class MaXmlTagRead
 {

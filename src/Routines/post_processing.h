@@ -21,28 +21,27 @@
 #ifndef POST_PROCESSING_H
 #define POST_PROCESSING_H
 
-#include <iostream>
-#include <sstream> 
-#include <fstream> 
+#include <cstdarg>
+#include <cstddef>
+#include <cstdio>
 #include <cstdlib>
 #include <cstring>
-#include <cstdio>
-#include <stdlib.h>
-#include <stddef.h>
-#include <stdarg.h>
-#include <string.h>
-#include <stdio.h>
-#include "../Classes/String_Matrices.h"
-#include "../Classes/Double_Matrices_cont.h"
+#include <fstream>
+#include <iostream>
+#include <sstream>
+#include <vector>
+
+#include <gsl/gsl_blas.h>
+#include <gsl/gsl_math.h>
+#include <gsl/gsl_matrix.h>
+#include <gsl/gsl_permutation.h>
+
 #include "../Classes/Double_Matrices.h"
+#include "../Classes/Double_Matrices_cont.h"
+#include "../Classes/Prior_param.h"
+#include "../Classes/String_Matrices.h"
 #include "../Routines/cond_post.h"
 #include "../Routines/matrix_handling.h"
-#include "../Classes/Prior_param.h"
-#include <gsl/gsl_matrix.h>
-#include <gsl/gsl_math.h>
-#include <gsl/gsl_permutation.h>
-#include <gsl/gsl_blas.h>
-#include <vector>
 
 using namespace std; 
 
@@ -69,7 +68,7 @@ void getAndSortPostGam(gsl_vector* postGamVec,
                                gsl_permutation* idxPostGamSort,
                                const vector<vector<double> >& margLogPostVec);
 
-void combineAndPrintBestModel(ofstream& fOut,
+double combineAndPrintBestModel(ofstream& fOut,
                               gsl_permutation* const idxPostGamSort,
                               gsl_vector* const postGamVec,
                               const vector<vector<double> >& margLogPostVec,

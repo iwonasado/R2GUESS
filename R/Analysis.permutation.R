@@ -1,5 +1,5 @@
 Analysis.permutation <- function(x,Npermut,namePermut,threshold=0.05,path.output,number.cutoff=200){
-NameMarg <-  paste(x$path.output,x$root.file.output,"_output_marg_prob_incl.txt",sep="")
+NameMarg <- file.path(x$path.output, paste(x$root.file.output,"output_marg_prob_incl.txt",sep="_"))
 Marg <- read.table(NameMarg,header=TRUE)
 MPI <- Marg[,2]
 MPI.sort <- sort(MPI,decreasing=TRUE)
@@ -20,7 +20,7 @@ res.model.perm  <- as.ESS.object(dataY=x$dataY,dataX=x$dataX,path.input=x$path.i
 root.file.output=root.file.output,label.X=x$label.X,
 label.Y=x$label.Y,path.par=x$path.par,path.init=x$path.init,file.par=x$file.par,file.init=x$file.init,file.log=x$file.log,MAP.file=x$MAP.file,command=FALSE)
 
-NameMarg.perm <-  paste(res.model.perm$path.output,res.model.perm$root.file.output,"_output_marg_prob_incl.txt",sep="")
+NameMarg.perm <- file.path(res.model.perm$path.output, paste(res.model.perm$root.file.output,"output_marg_prob_incl.txt",sep="_"))
 Marg.perm <- read.table(NameMarg.perm,header=TRUE)
 MPI.perm <- c(MPI.perm,Marg.perm[,2])
 }

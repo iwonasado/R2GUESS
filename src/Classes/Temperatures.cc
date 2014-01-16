@@ -91,8 +91,8 @@ void Temperatures::set_Temp_param(unsigned int nb_chains,
 	   << "Run stopped." << endl;
       exit(1);
     }
-    double tmp1=fabs(log(M[0]/b_t)/log(2));
-    double tmp2=fabs(log(M[1]/b_t)/log(2));
+    double tmp1=fabs(log(M[0]/b_t)/log(2.0));
+    double tmp2=fabs(log(M[1]/b_t)/log(2.0));
     double numer=max(tmp1,tmp2);
     delta_n=numer/((double)(burn_in)/nbatch);
     optimal=optimal_input;

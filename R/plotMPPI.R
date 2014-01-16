@@ -17,7 +17,7 @@ plotMPPI <-
     if(is.null(x$label.X)) label.X <- as.character(1:x$p)
     if(is.null(x$label.Y)) Pheno <- paste("Y",1:x$q,sep="",collapse="_") else Pheno <- paste("Y: ",paste(x$label.Y,collapse="/"),sep="") 
     
-    NameMarg <-  paste(x$path.output,x$root.file.output,"_output_marg_prob_incl.txt",sep="")
+    NameMarg <- file.path(x$path.output, paste(x$root.file.output,"output_marg_prob_incl.txt",sep="_"))
     Marg <- read.table(NameMarg,header=TRUE)
     
     lab.X <- "predictor"
@@ -31,7 +31,7 @@ plotMPPI <-
       
       if(!is.null(x$MAP.file)){
         if(is.data.frame(x$MAP.file)){SNPLabels <- x$MAP.file}else{
-          NameMap.file <- paste(x$path.input,x$MAP.file,sep="")
+          NameMap.file <- file.path(x$path.input,x$MAP.file)
           SNPLabels <- read.table(NameMap.file,header=TRUE,stringsAsFactors = FALSE)}
         label.X <- SNPLabels$SNPName
         FullSNPList <- as.numeric(unique(unlist(strsplit(SelectedModels$modelPosInX," "))))
@@ -119,7 +119,7 @@ plotMPPI <-
       
       if(!is.null(x$MAP.file)){
         if(is.data.frame(x$MAP.file)){SNPLabels <- x$MAP.file}else{
-          NameMap.file <- paste(x$path.input,x$MAP.file,sep="")
+          NameMap.file <- file.path(x$path.input,x$MAP.file)
           SNPLabels <- read.table(NameMap.file,header=TRUE,stringsAsFactors = FALSE)}
         varX <- label.X <- SNPLabels$SNPName}
       

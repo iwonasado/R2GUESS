@@ -162,7 +162,7 @@ void getLogPost(vector<vector<double> >& margLogPostVec,
     nVarsIn=uniqueListModels[model][3];
     offset=4;
 
-    gsl_matrix *matXGam;
+    gsl_matrix *matXGam = NULL;
     if(nVarsIn>0){
       vector<unsigned int> listColumnsXGam;
       for(unsigned int currVar=offset;currVar<nVarsIn+offset;currVar++){
@@ -225,7 +225,7 @@ void getAndSortPostGam(gsl_vector* postGamVec,
   
 }
 
-void combineAndPrintBestModel(ofstream& fOut,
+double combineAndPrintBestModel(ofstream& fOut,
 				  gsl_permutation* const idxPostGamSort,
 				  gsl_vector* const postGamVec,
 				  const vector<vector<double> >& margLogPostVec,
@@ -258,6 +258,7 @@ void combineAndPrintBestModel(ofstream& fOut,
     }
     fOut << endl;
   }
+  return(nullMargLik);
 }
 
 void getAndPrintMargGam(ofstream& fOut,

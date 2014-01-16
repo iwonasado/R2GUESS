@@ -20,16 +20,19 @@
 #ifndef RAND_H_
 #define RAND_H_
 
-
 #include <cassert>
 #include <cmath>
 #include <iostream>
 #include <vector>
-#include <gsl/gsl_permutation.h>
+
+#include <gsl/gsl_linalg.h>
 #include <gsl/gsl_matrix.h>
-#include <gsl/gsl_rng.h>
+#include <gsl/gsl_permutation.h>
 #include <gsl/gsl_randist.h>
-#include <stdint.h> 
+#include <gsl/gsl_rng.h>
+#include <gsl/gsl_sf_gamma.h>
+#include <gsl/gsl_sf.h>
+#include <gsl/gsl_vector.h>
 
 using namespace std;
 

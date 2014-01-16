@@ -1,3 +1,4 @@
+import(fields, MCMCpack, methods, mixOmics, mvtnorm, snowfall)
 export(Analysis.permutation)
 export(Postprocess.R2GUESS)
 export(Extend.R2GUESS)

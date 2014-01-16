@@ -19,16 +19,19 @@
 */
 
 #ifndef CM_H
-#define CM_H 
-#include <iostream>
-#include <fstream>
+#define CM_H
+
+#include <cmath>
+#include <cstdio>
 #include <cstdlib>
 #include <cstring>
-#include <cstdio>
-#include <gsl/gsl_vector.h>
-#include <gsl/gsl_sort_vector.h>
-#include <math.h>
+#include <fstream>
+#include <iostream>
 #include <vector>
+
+#include <gsl/gsl_sort_vector.h>
+#include <gsl/gsl_vector.h>
+
 using namespace std;
 
 class CM

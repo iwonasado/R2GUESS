@@ -21,17 +21,18 @@
 #ifndef DYN_NAME_H
 #define DYN_NAME_H
 
-#include <stdlib.h>
-#include <stddef.h>
-#include <stdarg.h>
-#include <string.h>
-#include <stdio.h>
+#include <cstdarg>
+#include <cstddef>
+#include <cstdio>
+#include <cstdlib>
 #include <cstring>
 #include <iostream>
-#include <sstream> 
-#include <cstdarg>
+#include <sstream>
+#include <string>
+
 #include "struc.h"
-using namespace std; 
+
+using namespace std;
 
 string Get_dyn_name(string File_name,
 		    int Number,

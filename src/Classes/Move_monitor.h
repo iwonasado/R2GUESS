@@ -21,16 +21,18 @@
 #ifndef MOVE_MONITOR_H
 #define MOVE_MONITOR_H 1
 
-#include <iostream>
-#include <fstream>
-#include <sstream>
+#include <cmath>
+#include <cstdio>
 #include <cstdlib>
 #include <cstring>
-#include <cstdio>
-#include <gsl/gsl_vector.h>
-#include <gsl/gsl_sort_vector.h>
-#include <math.h>
+#include <fstream>
+#include <iostream>
+#include <sstream>
 #include <vector>
+
+#include <gsl/gsl_sort_vector.h>
+#include <gsl/gsl_vector.h>
+
 using namespace std;
 
 class Move_monitor

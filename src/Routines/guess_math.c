@@ -18,37 +18,10 @@
  * along with GUESS.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef DR_H
-#define DR_H
+#include <math.h>
 
-#include <cmath>
-#include <cstdio>
-#include <cstdlib>
-#include <cstring>
-#include <fstream>
-#include <iostream>
-#include <vector>
-
-#include <gsl/gsl_sort_vector.h>
-#include <gsl/gsl_vector.h>
-
-using namespace std;
-
-class DR
+int c99_isfinite(double x)
 {
- public:
-  DR();
-  ~DR(){};
+    return isfinite(x);
+}
 
-  unsigned int nb_calls_adj;
-  unsigned int nb_calls;
-
-  void display_DR();
-  vector < vector < unsigned int > > mat_moves_accepted;
-  vector < vector < unsigned int > > mat_moves_proposed;
-
-  void set_DR(unsigned int n_chains);
- 
-};
-
-#endif /* !defined DR_H */

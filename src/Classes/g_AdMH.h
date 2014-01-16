@@ -21,18 +21,20 @@
 #ifndef G_AdMH_H
 #define G_AdMH_H
 
-#include <iostream>
-#include <fstream>
+#include <algorithm>
+#include <cmath>
+#include <cstdio>
 #include <cstdlib>
 #include <cstring>
-#include <cstdio>
-#include <gsl/gsl_vector.h>
-#include <gsl/gsl_sort_vector.h>
-#include <math.h>
-#include "../Routines/matrix_handling.h"
-#include <gsl/gsl_statistics_double.h>
+#include <fstream>
+#include <iostream>
 #include <vector>
-#include <algorithm>
+
+#include <gsl/gsl_sort_vector.h>
+#include <gsl/gsl_statistics_double.h>
+#include <gsl/gsl_vector.h>
+
+#include "../Routines/matrix_handling.h"
 
 using namespace std;
 

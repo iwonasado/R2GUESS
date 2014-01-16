@@ -4,7 +4,7 @@ label.X=NULL,label.Y=NULL,path.par,path.init=NULL,file.par,file.init=NULL,file.l
 if(!is.character(dataY)) stop("dataY should be a character vector")
 if(!is.character(dataX)) stop("dataY should be a character vector")
 
-Namefeatures <- paste(path.output,root.file.output,"_","features.txt",sep="")
+Namefeatures <- file.path(path.output, paste(root.file.output,"features.txt",sep="_"))
 features <- read.table(file=Namefeatures,header=TRUE)
 rownames(features) <- features[,1]
 
@@ -50,7 +50,7 @@ path.output <- path.expand(path.output)
 path.par <- path.expand(path.par)
 if(is.null(file.log)) file.log <- root.file.output
 
-if(command==TRUE) command <- readLines(paste(path.output,root.file.output,"-command-C.txt",sep="")) else command <- NULL
+if(command==TRUE) command <- readLines(file.path(path.output, paste(root.file.output,"command-C.txt",sep="-"))) else command <- NULL
 
 
 res <- list(dataY=dataY,dataX=dataX,path.input=path.input,path.output=path.output,path.par=path.par, path.init=path.init, history=history,time=time,file.par =file.par,file.init=file.init,file.log=file.log,

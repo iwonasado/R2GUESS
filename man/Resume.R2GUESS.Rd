@@ -43,10 +43,9 @@ user-defined time limit.}
 \examples{
 \dontrun{
 ## First we are creating a run which has been not finished in 1 hour
-path.input <- paste(system.file("Input", package="R2GUESS"),"/",sep="")
-###Output files are created in the current directory
-path.output <- paste(getwd(),"/",sep="")
-path.par <- paste(system.file("extdata", package="R2GUESS"),"/",sep="")
+path.input <- system.file("Input", package="R2GUESS")
+path.output <- tmpdir()
+path.par <- system.file("extdata", package="R2GUESS")
 file.par.Hopx <- "Par_file_example_Hopx.xml"
 print(paste(path.par,file.par.Hopx,sep=""))
 root.file.output.Hopx <- "Example-GUESS-Y-Hopx"

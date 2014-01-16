@@ -21,32 +21,31 @@
 #ifndef MATRIX_HANDLING_H
 #define MATRIX_HANDLING_H
 
-#include <iostream>
-#include <iomanip>
-#include <sstream> 
-#include <fstream> 
+#include <algorithm>
+#include <cstdarg>
+#include <cstddef>
+#include <cstdio>
 #include <cstdlib>
 #include <cstring>
-#include <cstdio>
-#include <stdlib.h>
-#include <stddef.h>
-#include <stdarg.h>
-#include <string.h>
-#include <stdio.h>
-#include "../Classes/String_Matrices.h"
-#include "../Classes/Double_Matrices_cont.h"
-#include "../Classes/Double_Matrices.h"
-#include "../Classes/Int_Matrices.h"
-#include "../Classes/Temperatures.h"
-#include "../Classes/DR.h"
-#include "../Routines/rand.h"
-#include <gsl/gsl_matrix.h>
-#include <gsl/gsl_rng.h>
-#include <gsl/gsl_math.h>
-#include <gsl/gsl_permutation.h>
-#include <gsl/gsl_blas.h>
+#include <fstream>
+#include <iomanip>
+#include <iostream>
+#include <sstream>
 #include <vector>
-#include <algorithm>
+
+#include <gsl/gsl_blas.h>
+#include <gsl/gsl_math.h>
+#include <gsl/gsl_matrix.h>
+#include <gsl/gsl_permutation.h>
+#include <gsl/gsl_rng.h>
+
+#include "../Classes/Double_Matrices.h"
+#include "../Classes/Double_Matrices_cont.h"
+#include "../Classes/DR.h"
+#include "../Classes/Int_Matrices.h"
+#include "../Classes/String_Matrices.h"
+#include "../Classes/Temperatures.h"
+#include "../Routines/rand.h"
 
 using namespace std; 
 

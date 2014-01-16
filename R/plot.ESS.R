@@ -6,11 +6,11 @@ plot.ESS <- function(x,...){
 
   if(is.null(x$label.Y)) Pheno <- paste("Y",1:x$q,sep="",collapse="_") else Pheno <- paste("Y: ",paste(x$label.Y,collapse="/"),sep="") 
 
-NameMarg <-  paste(x$path.output,x$root.file.output,"_output_marg_prob_incl.txt",sep="")
-NameGHistory <- paste(x$path.output,x$root.file.output,"_output_g_history.txt",sep="")
-NameModelSize <- paste(x$path.out,x$root.file.output,"_output_model_size_history.txt",sep="")
-NameCondPost <- paste(x$path.out,x$root.file.output,"_output_log_cond_post_prob_history.txt",sep="")
-NameTemp <- paste(x$path.out,x$root.file.output,"_output_temperature_history.txt",sep="")
+NameMarg <- file.path(x$path.output, paste(x$root.file.output,"output_marg_prob_incl.txt",sep="_"))
+NameGHistory <- file.path(x$path.output, paste(x$root.file.output,"output_g_history.txt",sep="_"))
+NameModelSize <- file.path(x$path.out, paste(x$root.file.output,"output_model_size_history.txt",sep="_"))
+NameCondPost <- file.path(x$path.out, paste(x$root.file.output,"output_log_cond_post_prob_history.txt",sep="_"))
+NameTemp <- file.path(x$path.out, paste(x$root.file.output,"output_temperature_history.txt",sep="_"))
 Marg <- read.table(NameMarg,header=TRUE)
 
 

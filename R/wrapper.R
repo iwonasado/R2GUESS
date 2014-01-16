@@ -1,6 +1,6 @@
 wrapper <- function(x,root.file.output,object,path.input,path.output,Y=Y,start.counter) {
   number <- x+start.counter-1
-  root.file.output.perm <- paste(root.file.output,number,sep="")
+  root.file.output.perm <- file.path(root.file.output,number)
   if(object$n > 50) indY <- sample(1:object$n,object$n) else{
     cond <- TRUE
     while (cond){
@@ -11,7 +11,7 @@ wrapper <- function(x,root.file.output,object,path.input,path.output,Y=Y,start.c
   Yperm <- Y[indY,]
   
   name.Y <- paste("Yperm-",number,"-C-CODE.txt",sep="")
-  nameY <- paste(path.expand(path.input),name.Y,sep="")
+  nameY <- file.path(path.expand(path.input),name.Y)
   
   cat(object$n,"\n",object$q,"\n",file=nameY,sep="")
   write(t(Yperm), ncolumns=object$q,append = TRUE,file=nameY,sep="\t")
@@ -25,7 +25,7 @@ res.model.perm <- R2GUESS.perm(dataY=name.Y,dataX=object$dataX,path.inputx=objec
   
   
  
-  NameMarg.perm <-  paste(res.model.perm$path.output,res.model.perm$root.file.output,"_output_marg_prob_incl.txt",sep="")
+  NameMarg.perm <- file.path(res.model.perm$path.output, paste(res.model.perm$root.file.output,"output_marg_prob_incl.txt",sep="_"))
   Marg.perm <- read.table(NameMarg.perm,header=TRUE)
 
   result <- list(MPI.perm=Marg.perm[,2],JF.best=max(res.model.perm$BestModels$jeffries))

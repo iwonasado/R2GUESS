@@ -114,7 +114,7 @@ void Gibbs_move(Double_Matrices mat_log_marg,
 		    vect_gam[pos_current_chain]);
     
     unsigned int n_vars_in=list_columns_X_gam.size();
-    gsl_matrix *mat_X_gam;
+    gsl_matrix *mat_X_gam = NULL;
     double propLogLik,propLogPost;
     double log_condPost0,log_condPost1;
     double current_t,argument,theta;
@@ -284,7 +284,7 @@ void All_exchange_move(gsl_matrix *description_exchange_move,
       double argument=((mat_log_cond_post.matrix[pos_c2][sweep]-mat_log_cond_post.matrix[pos_c1][sweep])*
 		       (1.0/(*t_tun).t[c1] - 1.0/(*t_tun).t[c2]));
       double pbty=exp(argument);
-      if(isnan(pbty)==1){
+      if(!GUESS_isfinite(pbty)){
 	pbty=0.0;
       }
       description_exchange_move->data[2*nb_cols+rank]=pbty;
@@ -408,7 +408,7 @@ void DR_move(DR *My_DR,
 	 << endl;
   }
   
-  if(isnan(pbty_1)==1 || pbty_1==0.0){
+  if(!GUESS_isfinite(pbty_1) || pbty_1==0.0){
     
     if(DEBUG){
       cout << "pbty_1 is nan or null -- move rejected" << endl;
@@ -537,7 +537,7 @@ void DR_move(DR *My_DR,
 	     << " -- rand_2 " << rand_accept_2
 	     << endl;
       }
-      if(isnan(pbty_final)==1){
+      if(!GUESS_isfinite(pbty_final)){
 	if(DEBUG){
 	  cout << "Pbty for second DR move is nan: move rejected" << endl;
 	}
@@ -669,7 +669,7 @@ void sample_g(Double_Matrices mat_log_marg,
     
     unsigned int n_vars_in=list_columns_X_gam.size();
 
-    gsl_matrix *mat_X_gam;
+    gsl_matrix *mat_X_gam = NULL;
     if(n_vars_in>0){
       mat_X_gam=get_X_reduced(list_columns_X_gam,mat_X);
     }
@@ -709,7 +709,7 @@ void sample_g(Double_Matrices mat_log_marg,
   if(DEBUG){
     cout << "\talpha_g= " << alpha_g << endl;
   }
-  if(!isnan(alpha_g)){
+  if(GUESS_isfinite(alpha_g)){
     double rand_test = myrand(RandomNumberGenerator);
     if(rand_test<alpha_g && g_prop>0.0){
       (*My_Move_monitor).g_sample_nb_accept++;
@@ -919,7 +919,7 @@ void FSMH_move(Double_Matrices mat_log_marg,
 	    alpha_FSMH=0.0;
 	  }else{
 
-	    gsl_matrix *mat_X_gam;
+	    gsl_matrix *mat_X_gam = NULL;
 	    if(n_vars_in>0){
 	      mat_X_gam=get_X_reduced(list_columns_X_gam,mat_X);
 	    }
@@ -982,7 +982,7 @@ void FSMH_move(Double_Matrices mat_log_marg,
 			  vect_gam[pos_current_chain]);
 	  
 	  unsigned int n_vars_in=list_columns_X_gam.size();
-	  gsl_matrix *mat_X_gam;
+	  gsl_matrix *mat_X_gam = NULL;
 	  if(n_vars_in>0){
 	    mat_X_gam=get_X_reduced(list_columns_X_gam,mat_X);
 	  }
@@ -1851,7 +1851,7 @@ void get_log_cond_post_log_marg_prop(gsl_vector *prop_log_marg_condPost,
 		  vect_gam_prop);
 
   unsigned int n_vars_in=list_columns_X_gam.size();
-  gsl_matrix *mat_X_gam;
+  gsl_matrix *mat_X_gam = NULL;
   if(n_vars_in>0){
     mat_X_gam=get_X_reduced(list_columns_X_gam,mat_X);
   }

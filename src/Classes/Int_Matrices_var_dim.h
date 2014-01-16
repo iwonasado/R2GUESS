@@ -21,12 +21,12 @@
 #ifndef INT_MATRICES_VAR_DIM_H
 #define INT_MATRICES_VAR_DIM_H 1
 
-#include <sstream>
-#include <iostream>
+#include <cstdlib>
+#include <cstring>
 #include <fstream>
-#include <string.h>
+#include <iostream>
+#include <sstream>
 #include <vector>
-#include <stdlib.h>
 
 using namespace std;
 

@@ -51,13 +51,13 @@ void g_AdMH::set_g_AdMH(int g_sample,
     optimal=g_AdMH_optimal_from_read;
     ls=g_AdMH_ls_from_read;
     if(fabs(g_M_min_input-0)<1e-10){
-      M[0]=-0.5*log(pX);
+      M[0]=-0.5*log((double) pX);
     }
     else{
       M[0]=g_M_min_input;
     }
     if(fabs(g_M_max_input-0)<1e-10){
-      M[1]=0.5*log(pX);
+      M[1]=0.5*log((double) pX);
     }
     else{
       M[1]=g_M_max_input;

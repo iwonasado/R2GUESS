@@ -1,15 +1,15 @@
-R2GUESS <- 
+R2GUESS <-
 function(dataY,dataX,path.input,path.output,path.par,path.init=NULL,file.par,file.init=NULL,file.log=NULL,nsweep,burn.in,Egam,Sgam,
-root.file.output,time=TRUE,top=100,history=TRUE,label.X=NULL,label.Y=NULL,choice.Y=NULL,nb.chain,conf=NULL,cuda=TRUE,MAP.file=NULL,time.limit=NULL,seed=NULL){
+root.file.output,time=TRUE,top=100,history=TRUE,label.X=NULL,label.Y=NULL,choice.Y=NULL,nb.chain,conf=NULL,cuda=TRUE,MAP.file=NULL,time.limit=NULL,seed=NULL)
+{
 
-
-  for (i in c(1:length(.libPaths()))) {
-    if ( file.exists(paste(.libPaths()[i],"R2GUESS",sep="/")) )
-      which.lib <- i
-  }
+##   for (i in c(1:length(.libPaths()))) {
+##     if ( file.exists(paste(.libPaths()[i],"R2GUESS",sep="/")) )
+##       which.lib <- i
+##   }
   # Setup file paths
-  pack.root <- .libPaths()[which.lib]
-  ESS.directory <- paste(pack.root,"/R2GUESS/exec/",sep="")
+  pack.root <- system.file(package = "R2GUESS")
+  ESS.directory <- file.path(pack.root, "bin", .Platform$r_arch)
 
 
 if(burn.in>nsweep) stop("the number of burnin should be lower than the number of sweep (nsweep)")
@@ -21,11 +21,11 @@ if(is.data.frame(dataX)){
   p <- dim(X)[2]
   n <- dim(X)[1]
   newdataX <- "data-X-C-CODE.txt"
-  name.X <- paste(path.expand(path.input),newdataX,sep="")
+  name.X <- file.path(path.expand(path.input),newdataX)
   cat(n,"\n",p,"\n",file=name.X,sep="")
   write(t(X), ncolumns=p,append = TRUE,file=name.X,sep="\t")
   }else{
-  info <- readLines(paste(path.expand(path.input),dataX,sep=""),n=2)
+  info <- readLines(file.path(path.expand(path.input),dataX),n=2)
   n <- as.integer(info[1])
   p <- as.integer(info[2])
   newdataX <- dataX
@@ -34,18 +34,18 @@ if(is.data.frame(dataX)){
 #  q <- length(choice.Y)
   if(is.data.frame(dataY)) {
   Y <- dataY
-  q0 <- dim(Y)[2] 
+  q0 <- dim(Y)[2]
   label.Y <- colnames(Y)
   file.Y <- FALSE
   if(is.null(choice.Y)) choice.Y <- 1:q0
-  q <- length(choice.Y)		
+  q <- length(choice.Y)
   }else{
-  info <- readLines(paste(path.expand(path.input),dataY,sep=""),n=2)
+  info <- readLines(file.path(path.expand(path.input),dataY),n=2)
   ny <- as.integer(info[1])
   q0 <- as.integer(info[2])
-  Y <- read.table(paste(path.expand(path.input),dataY,sep=""),skip=2)  
+  Y <- read.table(file.path(path.expand(path.input),dataY),skip=2)
   if(is.null(choice.Y)) choice.Y <- 1:q0
-  q <- length(choice.Y)		
+  q <- length(choice.Y)
   if(ny!=dim(Y)[1]) stop("number of subject has to be specified in the first row of the txt file")
   if(q0!=dim(Y)[2]) stop("dimension of the phenotype has to be specified in the second row of the txt file")
   if(n!=ny) stop("the two data set (predictors and phenotype) have not compatible regarding the number of subject")
@@ -58,12 +58,12 @@ if(is.null(label.Y))  label.Y <- paste("Y",1:q0,sep=".")
 if(is.null(colnames(Y))) colnames(Y) <- label.Y
 
 
-if(file.Y==FALSE){   
+if(file.Y==FALSE){
 if(q==q0) nameY <- "ALL" else{
 if(is.numeric(choice.Y)) choice.Y <- label.Y[choice.Y]
-nameY <- paste(choice.Y,collapse="-")}   
+nameY <- paste(choice.Y,collapse="-")}
 newdataY <- paste("data-Y-",nameY,"-C-CODE.txt",sep="")
-name.Y <- paste(path.expand(path.input),newdataY,sep="")
+name.Y <- file.path(path.expand(path.input),newdataY)
 ### Choice of the component of Y to be analysed
 if(dim(Y)[2]!=1){
 Y <- Y[,choice.Y]
@@ -81,20 +81,20 @@ if(is.data.frame(conf)){
   k <- dim(Z)[2]
   n <- dim(Z)[1]
   newdataZ <- "data-Z-C-CODE.txt"
-  name.Z <- paste(path.expand(path.input),newdataZ,sep="")
+  name.Z <- file.path(path.expand(path.input),newdataZ)
   cat(n,"\n",k,"\n",file=name.Z,sep="")
   write(t(Z), ncolumns=k,append = TRUE,file=name.Z,sep="\t")
   }else{
-  info.Z <- readLines(paste(path.expand(path.input),conf,sep=""),n=2)
+  info.Z <- readLines(file.path(path.expand(path.input),conf),n=2)
   n <- as.integer(info.Z[1])
   k <- as.integer(info.Z[2])
-  Z <- read.table(paste(path.expand(path.input),conf,sep=""),skip=2)
+  Z <- read.table(file.path(path.expand(path.input),conf),skip=2)
   }
 Z <- as.matrix(Z)
 beta <- (solve(t(Z)%*%Z)%*%t(Z))%*%as.matrix(Y)
-residu <- as.matrix(Y)-Z%*%beta 
+residu <- as.matrix(Y)-Z%*%beta
 newdataY <- paste("residu-",newdataY,sep="")
-name.conf <- paste(path.expand(path.input),newdataY,sep="")
+name.conf <- file.path(path.expand(path.input),newdataY)
 cat(n,"\n",q,"\n",file=name.conf,sep="")
 write(t(residu), ncolumns=q,append = TRUE,file=name.conf,sep="\t")
 #conf <- k
@@ -109,7 +109,7 @@ if(history==TRUE) history1 <- " -history " else history1 <- NULL
 
 if(cuda==TRUE) cuda1 <- " -cuda " else cuda1 <- NULL
 
-ESS.directory <- path.expand(ESS.directory)
+#ESS.directory <- path.expand(ESS.directory)
 path.input <- path.expand(path.input)
 path.output <- path.expand(path.output)
 path.par <- path.expand(path.par)
@@ -123,26 +123,27 @@ confounder <- 0
 
 if(is.null(time.limit)) option.timelimit <- NULL else option.timelimit <- paste(" -timeLimit ",time.limit," ",sep="")
 
+guess.executable <- ifelse(.Platform$OS.type == "unix", "GUESS", "GUESS.exe")
 if(!is.null(path.init)){
 path.init <- path.expand(path.init)
-command <- paste(ESS.directory,"GUESS"," -X ",path.input,newdataX," -Y ",path.input,newdataY, " -par ",path.par,file.par," -init ",path.init,file.init," -nsweep ",nsweep,
-burn.in1, " -out_full ",path.output,root.file.output,top1," -nconf ",confounder,cuda1,time1,history1,option.timelimit," -Egam ",Egam," -Sgam ",Sgam," -n_chain ",nb.chain,seed.opt,log1," > ", path.output,file.log,"_log",sep="")
+command <- file.path(ESS.directory, guess.executable, paste(" -X ",path.input,newdataX," -Y ",path.input,newdataY, " -par ",path.par,file.par," -init ",path.init,file.init," -nsweep ",nsweep,
+burn.in1, " -out_full ",path.output,root.file.output,top1," -nconf ",confounder,cuda1,time1,history1,option.timelimit," -Egam ",Egam," -Sgam ",Sgam," -n_chain ",nb.chain,seed.opt,log1," > ", path.output,file.log,"_log",sep=""))
 }else{
-command <- paste(ESS.directory,"GUESS"," -X ",path.input,newdataX," -Y ",path.input,newdataY, " -par ",path.par,file.par," -nsweep ",nsweep,
-burn.in1, " -out_full ",path.output,root.file.output,top1," -nconf ",confounder,cuda1,time1,history1,option.timelimit," -Egam ",Egam," -Sgam ",Sgam," -n_chain ",nb.chain,seed.opt,log1," > ", path.output,file.log,"_log",sep="")}
+command <- file.path(ESS.directory, guess.executable, paste(" -X ",path.input,newdataX," -Y ",path.input,newdataY, " -par ",path.par,file.par," -nsweep ",nsweep,
+burn.in1, " -out_full ",path.output,root.file.output,top1," -nconf ",confounder,cuda1,time1,history1,option.timelimit," -Egam ",Egam," -Sgam ",Sgam," -n_chain ",nb.chain,seed.opt,log1," > ", path.output,file.log,"_log",sep=""))}
 
-write(command,file=paste(path.output,root.file.output,"-command-C.txt",sep=""))
+write(command,file=file.path(path.output, paste(root.file.output,"command-C.txt",sep="-")))
 print(command)
 if (.Platform$OS.type == "unix") {
-	system(command)
+    system(command)
 } else if (.Platform$OS.type == "windows") {
-	shell(command)
+    shell(command)
 }
 
-Namefeatures <- paste(path.output,root.file.output,"_features.txt",sep="")
+Namefeatures <- file.path(path.output, paste(root.file.output,"features.txt",sep="_"))
 features <- read.table(file=Namefeatures,header=TRUE)
 rownames(features) <- features[,1]
-if(features["run_finished","value"]==1){ BestModels <- get.best.models(path.output,path.input,root.file.output,label.X=label.X,p=p,MAP.file) 
+if(features["run_finished","value"]==1){ BestModels <- get.best.models(path.output,path.input,root.file.output,label.X=label.X,p=p,MAP.file)
 Finish <- TRUE
 cat("The run is ok","\n")
 cat("You can now analyse the results","\n")
@@ -156,12 +157,12 @@ BestModels <- NULL
 Finish <- FALSE
 }
 
-res <- list(dataY = newdataY, dataX = newdataX, path.input = path.input, 
+res <- list(dataY = newdataY, dataX = newdataX, path.input = path.input,
         path.output = path.output, path.par=path.par, path.init=path.init, history = history, time = time, file.par =file.par,file.init=file.init,file.log=file.log,
-        root.file.output = root.file.output, nsweep = features["last_sweep","value"], 
-        top = top, BestModels = BestModels, label.X = label.X, 
+        root.file.output = root.file.output, nsweep = features["last_sweep","value"],
+        top = top, BestModels = BestModels, label.X = label.X,
         label.Y = label.Y, p = p, q = q, n=n, nb.chain = nb.chain,
         burn.in = burn.in,conf=conf,cuda=cuda,Egam=Egam,Sgam=Sgam,MAP.file=MAP.file,command=command,seed=features["seed","value"],Finish=Finish)
 class(res) <- "ESS"
 return(res)
-} 
+}

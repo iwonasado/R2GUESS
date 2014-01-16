@@ -3,7 +3,7 @@ get.g.sweep <- function(x,res,model){
   path.output <- x$path.output
   file.in <- x$root.file.output
   nsweep <- x$nsweep
-  g.history <- paste(path.output,file.in,"_output_g_history.txt",sep="")
+  g.history <- file.path(path.output, paste(file.in,"output_g_history.txt",sep="_"))
   SNPs <- unlist(strsplit(x$BestModels$modelName[as.numeric(model)]," "))
   g <- read.table(g.history,header=TRUE)
   ##remove the burn.in
@@ -11,8 +11,8 @@ get.g.sweep <- function(x,res,model){
   indice <- which(res[,model]==TRUE)
   if(length(indice)==0) stop("the model has not been visited")
   g.value <- g[indice,2] 
-  dataX <- read.table(paste(x$path.input,x$dataX,sep=""),skip=2)
-  dataY <- read.table(paste(x$path.input,x$dataY,sep=""),skip=2)
+  dataX <- read.table(file.path(x$path.input,x$dataX),skip=2)
+  dataY <- read.table(file.path(x$path.input,x$dataY),skip=2)
   centerY <- scale(dataY,scale=FALSE)
   if(is.null(x$MAP.file)){
     X <- dataX[,as.numeric(SNPs)]

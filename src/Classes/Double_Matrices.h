@@ -21,14 +21,13 @@
 #ifndef DOUBLE_MATRICES_H
 #define DOUBLE_MATRICES_H 1
 
-#include <iostream>
-#include <fstream>
-#include <iomanip>
+#include <algorithm>
+#include <cstdio>
 #include <cstdlib>
 #include <cstring>
-#include <cstdio>
-#include <algorithm>
-#include <string.h>
+#include <fstream>
+#include <iomanip>
+#include <iostream>
 
 using namespace std;
 

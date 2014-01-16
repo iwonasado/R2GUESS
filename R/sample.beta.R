@@ -1,6 +1,6 @@
 sample.beta <- function(x,res.g,Nmonte.sigma=1,Nmonte=1){
 if(x$q>1){  
-Namefeatures <- paste(x$path.output,x$root.file.output,"_features.txt",sep="")
+Namefeatures <- file.path(x$path.output, paste(x$root.file.output,"features.txt",sep="_"))
 features <- read.table(file=Namefeatures,header=TRUE)
 rownames(features) <- features[,1]
 s <- (features["med_RMSE","value"])**2
@@ -21,7 +21,7 @@ for(i in res.g$g.value) {
   }
   } 
 result <- list(res.beta =res.beta,predictors=res.g$predictors)}else{
-  Namefeatures <- paste(x$path.output,x$root.file.output,"_features.txt",sep="")
+  Namefeatures <- file.path(x$path.output, paste(x$root.file.output,"features.txt",sep="_"))
   features <- read.table(file=Namefeatures,header=TRUE)
   rownames(features) <- features[,1]
 #  a.sigma <- features["a.sigma","value"]

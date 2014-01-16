@@ -10,12 +10,12 @@ Resume.R2GUESS <- function(x,time.limit=NULL){
   
   print(command)
   if (.Platform$OS.type == "unix") {
-	system(command)
+    system(command)
   } else if (.Platform$OS.type == "windows") {
-	shell(command)
+    shell(command)
   }
   
-  Namefeatures <- paste(x$path.output,x$root.file.output,"_features.txt",sep="")
+  Namefeatures <- file.path(x$path.output, paste(x$root.file.output,"features.txt",sep="_"))
   features <- read.table(file=Namefeatures,header=TRUE)
   rownames(features) <- features[,1]
   if(features["run_finished","value"]==1){ BestModels <- get.best.models(x$path.output,x$path.input,x$root.file.output,label.X=x$label.X,p=x$p,x$MAP.file) 

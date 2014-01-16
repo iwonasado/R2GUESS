@@ -20,52 +20,51 @@
 // v1.1 edits:
 // -adding -extend option:  to append extra iterations to a finished run
 //                          one argumen: the number of extra sweeps.
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <math.h>
-#include <ctype.h>
-#include <iostream>
-#include <ctime>
-#include <vector>
+
 #include <algorithm>
-#include <memory>
+#include <cmath>
+#include <cstdio>
+#include <cstdlib>
+#include <cstring>
+#include <ctime>
 #include <fstream>
+#include <iostream>
+#include <memory>
 #include <sstream>
-#include "../Routines/struc.h"
-#include "../Routines/dyn_name.h"
-#include "../Routines/matrix_handling.h"
-#include "../Routines/rand.h"
-#include "../Routines/moves.h"
-#include "../Routines/regression.h"
-#include "../Routines/cond_post.h"
-#include "../Routines/post_processing.h"
-#include "../Routines/xml_file_read.h"
-#include "../Classes/String_Matrices.h"
-#include "../Classes/Int_Matrices.h"
-#include "../Classes/Int_Matrices_var_dim.h"
-#include "../Classes/Double_Matrices.h"
-#include "../Classes/Double_Matrices_cont.h"
-#include "../Classes/Prior_param.h"
-#include "../Classes/Temperatures.h"
-#include "../Classes/Move_monitor.h"
-#include "../Classes/g_AdMH.h"
-#include "../Classes/DR.h"
-#include "../Classes/CM.h"
-#include <gsl/gsl_fit.h>
-#include <gsl/gsl_multifit.h>
+#include <vector>
+
+#include <gsl/gsl_blas.h>
 #include <gsl/gsl_cdf.h>
+#include <gsl/gsl_fit.h>
+#include <gsl/gsl_linalg.h>
+#include <gsl/gsl_multifit.h>
+#include <gsl/gsl_permutation.h>
 #include <gsl/gsl_randist.h>
 #include <gsl/gsl_sort.h>
 #include <gsl/gsl_sort_vector.h>
-#include <gsl/gsl_permutation.h>
-#include <gsl/gsl_linalg.h>
-#include <gsl/gsl_blas.h>
+
+#include "../Classes/CM.h"
+#include "../Classes/Double_Matrices.h"
+#include "../Classes/Double_Matrices_cont.h"
+#include "../Classes/DR.h"
+#include "../Classes/g_AdMH.h"
+#include "../Classes/Int_Matrices.h"
+#include "../Classes/Int_Matrices_var_dim.h"
+#include "../Classes/Move_monitor.h"
+#include "../Classes/Prior_param.h"
+#include "../Classes/String_Matrices.h"
+#include "../Classes/Temperatures.h"
+#include "../Routines/cond_post.h"
+#include "../Routines/dyn_name.h"
+#include "../Routines/matrix_handling.h"
+#include "../Routines/moves.h"
+#include "../Routines/post_processing.h"
+#include "../Routines/rand.h"
+#include "../Routines/regression.h"
+#include "../Routines/struc.h"
+#include "../Routines/xml_file_read.h"
 
 #if _CUDA_
-#include <cuda.h>
-#include <cuda_runtime_api.h>
-#include <cublas.h>
 #include <cula.h>
 #endif
 
@@ -268,13 +267,13 @@ int main(int argc, char *  argv[])
             cout << "Detected " << nDevices << " gpu devices" << endl;
           }
 
-          cudaThreadExit();
+          //culaThreadExit();
           for(int i=0;i<nDevices;i++){
             culaStat=culaSelectDevice(i);
             if(culaStat!=culaNoError){
               cout << culaGetStatusString(culaStat) << endl;
               cout << culaGetErrorInfo() << endl;
-              cudaThreadExit();
+              //culaThreadExit();
               continue;
             }
 
@@ -282,9 +281,8 @@ int main(int argc, char *  argv[])
             if(culaStat!=culaNoError){
               cout << culaGetStatusString(culaStat) << endl;
               cout << culaGetErrorInfo() << endl;
-              cublasShutdown();
               culaShutdown();
-              cudaThreadExit();
+              //culaThreadExit();
               continue;
             }
 
@@ -293,7 +291,6 @@ int main(int argc, char *  argv[])
 
           if(culaStat!=culaNoError){
             cout << "Unable to initialise GPU" << endl;
-            cublasShutdown();
             culaShutdown();
             exit(1);
           }else{
@@ -368,7 +365,7 @@ int main(int argc, char *  argv[])
           cout << "Unknown option: " << argv[na] << endl;
 #if _CUDA_
           if(cudaFlag){
-	    cublasShutdown();
+	    
 	    culaShutdown();
           }
 #endif
@@ -384,7 +381,6 @@ int main(int argc, char *  argv[])
 	 << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
 #if _CUDA_
     if(cudaFlag){
-      cublasShutdown();
       culaShutdown();
     }
 #endif
@@ -400,7 +396,6 @@ int main(int argc, char *  argv[])
 	 << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
 #if _CUDA_
     if(cudaFlag){
-      cublasShutdown();
       culaShutdown();
     }
 #endif
@@ -415,7 +410,6 @@ int main(int argc, char *  argv[])
 	 << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
 #if _CUDA_
     if(cudaFlag){
-      cublasShutdown();
       culaShutdown();
     }
 #endif
@@ -461,7 +455,6 @@ int main(int argc, char *  argv[])
       cout << "Post processing cannot be applied because current number of sweeps less than burn in -- stopping run" << endl;
 #if _CUDA_
       if(cudaFlag){
-        cublasShutdown();
         culaShutdown();
       }
 #endif
@@ -520,7 +513,7 @@ int main(int argc, char *  argv[])
 	 << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
 #if _CUDA_
     if(cudaFlag){
-      cublasShutdown();
+      //cublasShutdown();
       culaShutdown();
     }
 #endif
@@ -542,7 +535,7 @@ int main(int argc, char *  argv[])
 	 << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
 #if _CUDA_
     if(cudaFlag){
-      cublasShutdown();
+      //cublasShutdown();
       culaShutdown();
     }
 #endif
@@ -557,7 +550,7 @@ int main(int argc, char *  argv[])
 	 << "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << endl;
 #if _CUDA_
     if(cudaFlag){
-      cublasShutdown();
+      //cublasShutdown();
       culaShutdown();
     }
 #endif
@@ -901,7 +894,7 @@ int main(int argc, char *  argv[])
         cout << "Trying to resume a run where no history was written -- stopping run" << endl;
 #if _CUDA_
         if(cudaFlag){
-          cublasShutdown();
+          //cublasShutdown();
           culaShutdown();
         }
 #endif
@@ -939,7 +932,7 @@ int main(int argc, char *  argv[])
         cout << "Invalid Path and/or permission rights for " << OutputName << " -- run stopped." << endl;
 #if _CUDA_
         if(cudaFlag){
-          cublasShutdown();
+          //cublasShutdown();
           culaShutdown();
         }
 #endif
@@ -958,7 +951,7 @@ int main(int argc, char *  argv[])
         cout << "Invalid Path and/or permission rights for " << OutputName_n_vars_in << " -- run stopped." << endl;
 #if _CUDA_
         if(cudaFlag){
-          cublasShutdown();
+          //cublasShutdown();
           culaShutdown();
         }
 #endif
@@ -982,7 +975,7 @@ int main(int argc, char *  argv[])
         cout << "Trying to resume a run where no history was written -- stopping run" << endl;
 #if _CUDA_
         if(cudaFlag){
-          cublasShutdown();
+          //cublasShutdown();
           culaShutdown();
         }
 #endif
@@ -1009,7 +1002,7 @@ int main(int argc, char *  argv[])
         cout << "Invalid Path and/or permission rights for " << OutputName_n_models_visited << " -- run stopped." << endl;
 #if _CUDA_
         if(cudaFlag){
-          cublasShutdown();
+          //cublasShutdown();
           culaShutdown();
         }
 #endif
@@ -1028,7 +1021,7 @@ int main(int argc, char *  argv[])
         cout << "Invalid Path and/or permission rights for " << OutputName_log_cond_post_per_chain << " -- run stopped." << endl;
 #if _CUDA_
         if(cudaFlag){
-          cublasShutdown();
+          //cublasShutdown();
           culaShutdown();
         }
 #endif
@@ -1064,7 +1057,7 @@ int main(int argc, char *  argv[])
       cout << "Trying to resume a run where no history was written -- stopping run" << endl;
 #if _CUDA_
       if(cudaFlag){
-        cublasShutdown();
+        //cublasShutdown();
         culaShutdown();
       }
 #endif
@@ -1097,7 +1090,7 @@ int main(int argc, char *  argv[])
     cout << "Invalid Path and/or permission rights for " << OutputName_best_models << " -- run stopped." << endl;
 #if _CUDA_
     if(cudaFlag){
-      cublasShutdown();
+      //cublasShutdown();
       culaShutdown();
     }
 #endif
@@ -1121,7 +1114,7 @@ int main(int argc, char *  argv[])
     cout << "Invalid Path and/or permission rights for " << OutputName_features << " -- run stopped." << endl;
 #if _CUDA_
     if(cudaFlag){
-      cublasShutdown();
+      //cublasShutdown();
       culaShutdown();
     }
 #endif
@@ -1142,7 +1135,7 @@ int main(int argc, char *  argv[])
     cout << "Invalid Path and/or permission rights for " << OutputName_marg_gam << " -- run stopped." << endl;
 #if _CUDA_
     if(cudaFlag){
-      cublasShutdown();
+      //cublasShutdown();
       culaShutdown();
     }
 #endif
@@ -1718,7 +1711,7 @@ int main(int argc, char *  argv[])
       unsigned int n_vars_in=list_columns_X_gam.size();
       cout << "n_vars_in " << n_vars_in << endl;
 
-      gsl_matrix *matXGam;
+      gsl_matrix *matXGam = NULL;
       double logMargLik,logPost;
       if(n_vars_in>0){
         matXGam=get_X_reduced(list_columns_X_gam,
@@ -2212,7 +2205,7 @@ int main(int argc, char *  argv[])
 
 #if _CUDA_
         if(cudaFlag){
-          cublasShutdown();
+          //cublasShutdown();
           culaShutdown();
         }
 #endif
@@ -2331,15 +2324,15 @@ int main(int argc, char *  argv[])
                    idx_post_gam_sort,
                    vect_marg_log_post);
 
-  combineAndPrintBestModel(f_out_best_models,
-			   idx_post_gam_sort,
-			   vect_post_gam,
-			   vect_marg_log_post,
-			   Unique_List_Models,
-			   n_retained_models,
-			   pos_null_model,
-			   Out_full_Flag,
-			   nConfounders);
+  double nullMargLik=combineAndPrintBestModel(f_out_best_models,
+					      idx_post_gam_sort,
+					      vect_post_gam,
+					      vect_marg_log_post,
+					      Unique_List_Models,
+					      n_retained_models,
+					      pos_null_model,
+					      Out_full_Flag,
+					      nConfounders);
   
   
   getAndPrintMargGam(f_out_marg_gam,
@@ -2352,6 +2345,7 @@ int main(int argc, char *  argv[])
 
   f_out_features << "last_sweep\t" << sweep-1 << endl;
   f_out_features << "run_finished\t" << run_finished << endl;
+  f_out_features << "null_marginal_likelihood\t" << nullMargLik << endl;
 
   tmpTime = endTime;
   endTime = std::clock();
@@ -2361,6 +2355,10 @@ int main(int argc, char *  argv[])
     cout << "Main Loop Time: " << mainLoopTime  << endl;
   }
   cout << "Post Processing Time: " << postProcessTime  << endl;
+
+  cout << "***************************************" << endl
+       << "Marginal likelihood null model:" << nullMargLik << endl
+       << "***************************************" << endl;
 
   f_out_marg_gam.close();
   f_out_best_models.close();
@@ -2410,7 +2408,7 @@ int main(int argc, char *  argv[])
 
 #if _CUDA_
   if(cudaFlag){
-    cublasShutdown();
+    //cublasShutdown();
     culaShutdown();
   }
 #endif
