@@ -16,7 +16,7 @@ AC_DEFUN([AX_PATH_CULA],
         CULA_LIBS="$CULA_LIBS -L$CULA_LIB_PATH_32"
     fi
     if test -n "$CULA_LIBS"; then
-        CULA_LIBS="$CULA_LIBS -lcula_lapack -lcula_core -lcublas -lcudart"
+        CULA_LIBS="$CULA_LIBS -lcula_lapack"
     fi
 
     AC_LANG_PUSH(C++)

@@ -126,10 +126,10 @@ if(is.null(time.limit)) option.timelimit <- NULL else option.timelimit <- paste(
 guess.executable <- ifelse(.Platform$OS.type == "unix", "GUESS", "GUESS.exe")
 if(!is.null(path.init)){
 path.init <- path.expand(path.init)
-command <- file.path(ESS.directory, guess.executable, paste(" -X ",path.input,newdataX," -Y ",path.input,newdataY, " -par ",path.par,file.par," -init ",path.init,file.init," -nsweep ",nsweep,
+command <- file.path(ESS.directory, paste(guess.executable, " -X ",path.input,newdataX," -Y ",path.input,newdataY, " -par ",path.par,file.par," -init ",path.init,file.init," -nsweep ",nsweep,
 burn.in1, " -out_full ",path.output,root.file.output,top1," -nconf ",confounder,cuda1,time1,history1,option.timelimit," -Egam ",Egam," -Sgam ",Sgam," -n_chain ",nb.chain,seed.opt,log1," > ", path.output,file.log,"_log",sep=""))
 }else{
-command <- file.path(ESS.directory, guess.executable, paste(" -X ",path.input,newdataX," -Y ",path.input,newdataY, " -par ",path.par,file.par," -nsweep ",nsweep,
+command <- file.path(ESS.directory, paste(guess.executable, " -X ",path.input,newdataX," -Y ",path.input,newdataY, " -par ",path.par,file.par," -nsweep ",nsweep,
 burn.in1, " -out_full ",path.output,root.file.output,top1," -nconf ",confounder,cuda1,time1,history1,option.timelimit," -Egam ",Egam," -Sgam ",Sgam," -n_chain ",nb.chain,seed.opt,log1," > ", path.output,file.log,"_log",sep=""))}
 
 write(command,file=file.path(path.output, paste(root.file.output,"command-C.txt",sep="-")))

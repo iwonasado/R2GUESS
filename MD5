@@ -1,12 +1,12 @@
-df0e5f4a07cc204db652971b0ab76907 *DESCRIPTION
+84687af9e2cfdcadbbd521e4e917f765 *DESCRIPTION
 acb4062dd45df11741948bba9e0da305 *NAMESPACE
 58cfae7432de383aa06f8bc4fcaf55e0 *R/Analysis.permutation.R
 1a6ad0962eb0c349d0deaa14e8a9aa7e *R/Extend.R2GUESS.R
 3453a24ed5d369faf24a90384f46db4e *R/FDR.permutation.R
 b9bc277850027904f967a8c984325f71 *R/Postprocess.R2GUESS.R
 fd95eaf18eab7a83f58c4d32c620f55b *R/R2GUESS-package.R
-8f6f02630033c0ff1c55c1fa22caa946 *R/R2GUESS.R
-bebe0b89f91f2f5d17598874dfc49bda *R/R2GUESS.perm.R
+df46722afafaeac20e7c6a759552262d *R/R2GUESS.R
+4ff5bbbe3cfa4844313971c54084bed0 *R/R2GUESS.perm.R
 aef21afd622831ce3846ca3091b21e33 *R/Resume.R2GUESS.R
 1bb730904b960fe8c1d0c3a787971024 *R/as.ESS.object.R
 7ea63553aa1dca9f69fd17da35773edd *R/boxplotbeta.R
@@ -111,7 +111,7 @@ cb77da44b1f19bbed6a466f78ed4a719 *src/Classes/g_AdMH.cc
 bab44666e5cbe24c7131b5da1a66c5d8 *src/Classes/g_AdMH.h
 f0350381748d98ddf8046aa9a712fe25 *src/Main/GUESS.cc
 eaf96fa04d3d056d28728a9b29528e44 *src/Makevars.in
-7af6a51b4da17958a6d6c042f3f30e0d *src/Makevars.win
+94fc1b401c4a51b75f0d5853d49d16da *src/Makevars.win
 ac650366f3409eed3436d489ca1000bf *src/Routines/cond_post.cc
 325ceb1a9cb514a14a15985a5ec4d405 *src/Routines/cond_post.h
 6fa81256b737c3d69cddaa82e8b5c9d1 *src/Routines/dyn_name.cc
@@ -131,6 +131,6 @@ a1b4e9da8cdb7370e0c8e6274a601eb3 *src/Routines/regression.h
 7cd232d99f299f6917e0c4c956d02d83 *src/Routines/struc.h
 ecf3881b5bccad1a2ff8b4933f98c743 *src/Routines/xml_file_read.cc
 3b787623af55eb207ca57fcd8e52f883 *src/Routines/xml_file_read.h
-a0049dfae7c1f37cae4542cfc3dfa817 *src/install.libs.R
-3d90ac71d671928fbad7ee365ea3802f *tools/cula.m4
+e07a6ac4e51e48f3c7cea5e267d90f8f *src/install.libs.R
+4540ea02fa0cb660c5c6e0169c658f85 *tools/cula.m4
 4a56620cc145a4c50ecd0ff874284008 *tools/gsl.m4
