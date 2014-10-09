@@ -1,5 +1,5 @@
 plotMPPI <-
-  function(x,threshold.model=0.01,threshold.variable=0.1,Figure=TRUE,cutoff=TRUE){
+  function(x,threshold.model=0.01,threshold.variable=0.1,Figure=TRUE,cutoff=TRUE,useMC=FALSE){
     
     if(threshold.model<1) ListSelect <- which(x$BestModels$postProb>threshold.model) else{
       ListSelect <-1:threshold.model}
@@ -17,7 +17,11 @@ plotMPPI <-
     if(is.null(x$label.X)) label.X <- as.character(1:x$p)
     if(is.null(x$label.Y)) Pheno <- paste("Y",1:x$q,sep="",collapse="_") else Pheno <- paste("Y: ",paste(x$label.Y,collapse="/"),sep="") 
     
-    NameMarg <- file.path(x$path.output, paste(x$root.file.output,"output_marg_prob_incl.txt",sep="_"))
+    if (useMC) {
+        NameMarg <- file.path(x$path.output, paste(x$root.file.output,"output_marg_prob_incl_mc.txt",sep="_"))
+    } else {
+        NameMarg <- file.path(x$path.output, paste(x$root.file.output,"output_marg_prob_incl.txt",sep="_"))
+    }
     Marg <- read.table(NameMarg,header=TRUE)
     
     lab.X <- "predictor"
@@ -131,8 +135,6 @@ plotMPPI <-
         PosSNPs <- varHighlight
         PbtySNPs <- Marg$Marg_Prob_Incl[varHighlight]
         points(PosSNPs,PbtySNPs,col='red',pch=19)
-        print("toto")
-       
       }
       
       return(c(SelectedModels,list(var.TOP.MPI=as.character(label.X[varHighlight]),var.MPI=as.character(label.X[Highlight]))))

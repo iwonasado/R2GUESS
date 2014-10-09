@@ -1,12 +1,12 @@
 Resume.R2GUESS <- function(x,time.limit=NULL){
-  if(x$Finish==TRUE) stop("You don't need to use this function as you run has already finished")
+  if(x$Finish==TRUE) stop("You don't need to use this function as your run has already finished")
+  command <- paste(x$command," -resume ",sep="")
   if(!is.null(time.limit)){
-    split.command <- unlist(strsplit(x$command," "))  
+    split.command <- unlist(strsplit(command," "))  
     ind <- which(split.command=="-timeLimit")
     split.command[ind+1] <- time.limit
     command <- paste(split.command,collapse=" ") 
-  }else{
-    command <- paste(x$command," -resume ",niter,sep="")}
+  }
   
   print(command)
   if (.Platform$OS.type == "unix") {
@@ -25,9 +25,9 @@ Resume.R2GUESS <- function(x,time.limit=NULL){
   }
   else{
     cat("The run time reaches the specified time limit","\n")
-    cat("You can use the function Resume.R2GUESS to resume the run ","\n")
-    cat("You can also use the function PostProcess.R2GUESS to post-processing the current run ","\n")
-    cat("You have also the possibility to extend your run to reach the number of sweep you wanted ","\n")
+    cat("You can use the function Resume.R2GUESS to resume the run","\n")
+    cat("You can also use the function PostProcess.R2GUESS to post-process the current run","\n")
+    cat("You also have the possibility to extend your run to reach the number of sweeps you wanted","\n")
     BestModels <- NULL
     Finish <- FALSE
   }  

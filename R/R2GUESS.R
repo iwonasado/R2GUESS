@@ -126,11 +126,11 @@ if(is.null(time.limit)) option.timelimit <- NULL else option.timelimit <- paste(
 guess.executable <- ifelse(.Platform$OS.type == "unix", "GUESS", "GUESS.exe")
 if(!is.null(path.init)){
 path.init <- path.expand(path.init)
-command <- file.path(ESS.directory, paste(guess.executable, " -X ",path.input,newdataX," -Y ",path.input,newdataY, " -par ",path.par,file.par," -init ",path.init,file.init," -nsweep ",nsweep,
-burn.in1, " -out_full ",path.output,root.file.output,top1," -nconf ",confounder,cuda1,time1,history1,option.timelimit," -Egam ",Egam," -Sgam ",Sgam," -n_chain ",nb.chain,seed.opt,log1," > ", path.output,file.log,"_log",sep=""))
+command <- file.path(ESS.directory, paste(guess.executable, " -X ",file.path(path.input,newdataX)," -Y ",file.path(path.input,newdataY), " -par ",file.path(path.par,file.par)," -init ",file.path(path.init,file.init)," -nsweep ",nsweep,
+burn.in1, " -out_full ",file.path(path.output,root.file.output),top1," -nconf ",confounder,cuda1,time1,history1,option.timelimit," -Egam ",Egam," -Sgam ",Sgam," -n_chain ",nb.chain,seed.opt,log1," > ", file.path(path.output,file.log),"_log",sep=""))
 }else{
-command <- file.path(ESS.directory, paste(guess.executable, " -X ",path.input,newdataX," -Y ",path.input,newdataY, " -par ",path.par,file.par," -nsweep ",nsweep,
-burn.in1, " -out_full ",path.output,root.file.output,top1," -nconf ",confounder,cuda1,time1,history1,option.timelimit," -Egam ",Egam," -Sgam ",Sgam," -n_chain ",nb.chain,seed.opt,log1," > ", path.output,file.log,"_log",sep=""))}
+command <- file.path(ESS.directory, paste(guess.executable, " -X ",file.path(path.input,newdataX)," -Y ",file.path(path.input,newdataY), " -par ",file.path(path.par,file.par)," -nsweep ",nsweep,
+burn.in1, " -out_full ",file.path(path.output,root.file.output),top1," -nconf ",confounder,cuda1,time1,history1,option.timelimit," -Egam ",Egam," -Sgam ",Sgam," -n_chain ",nb.chain,seed.opt,log1," > ", file.path(path.output,file.log),"_log",sep=""))}
 
 write(command,file=file.path(path.output, paste(root.file.output,"command-C.txt",sep="-")))
 print(command)
@@ -143,7 +143,25 @@ if (.Platform$OS.type == "unix") {
 Namefeatures <- file.path(path.output, paste(root.file.output,"features.txt",sep="_"))
 features <- read.table(file=Namefeatures,header=TRUE)
 rownames(features) <- features[,1]
-if(features["run_finished","value"]==1){ BestModels <- get.best.models(path.output,path.input,root.file.output,label.X=label.X,p=p,MAP.file)
+if(features["run_finished","value"]==1){
+BestModels <- get.best.models(path.output,path.input,root.file.output,label.X=label.X,p=p,MAP.file)
+
+
+history.file <- file.path(
+    path.output, paste(root.file.output, "output_models_history.txt", sep="_"))
+model.history <- read.table(history.file, header=FALSE, sep="\t",
+                            skip=burn.in + 1, stringsAsFactors=FALSE)
+mppi.mc <- tabulate(
+    as.integer(c(lapply(model.history[,5], strsplit, split=" ", fixed=TRUE),
+               recursive=TRUE)),
+    nbins=p
+) / (features["last_sweep","value"] - burn.in + 1)
+mppi.file <- file.path(
+    path.output, paste(root.file.output, "output_marg_prob_incl_mc.txt", sep="_"))
+write.table(mppi.mc, mppi.file, quote=FALSE, sep="\t",
+            col.names=c("Predictor\tMarg_Prob_Incl"))
+
+
 Finish <- TRUE
 cat("The run is ok","\n")
 cat("You can now analyse the results","\n")
@@ -151,7 +169,7 @@ cat("You can now analyse the results","\n")
 else{
 cat("(i) The run time reaches the specified time limit","\n")
 cat("(ii) You can use the function Resume.R2GUESS to resume the run ","\n")
-cat("(iii) You can also use the function PostProcess.R2GUESS to post-processing the current run ","\n")
+cat("(iii) You can also use the function PostProcess.R2GUESS to post-process the current run ","\n")
 cat("(iv) You have also the possibility to extend your run to reach the number of sweep you wanted ","\n")
 BestModels <- NULL
 Finish <- FALSE

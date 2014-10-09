@@ -58,7 +58,7 @@
 
 \examples{
 \dontrun{
-path.output.perm <- tmpdir()
+path.output.perm <- tempdir()
 path.input.perm <-path.output.perm
 
 cutoff.1 <- FDR.permutation(x=modelY_Hopx,Npermut=6,start.counter=1,

@@ -64,7 +64,7 @@
 \examples{
 \dontrun{
 modelY_Hopx <- example.as.ESS.object()
-path.output.perm <- tmpdir()
+path.output.perm <- tempdir()
 path.input.perm <-path.output.perm
 
 cutoff <- FDR.permutation(x=modelY_Hopx,Npermut=100,start.counter=1,

@@ -32,7 +32,7 @@ MPPI, MPP, and list of best visited models.}
 \dontrun{
 ## First we are creating a run which has been not finished in 1 hour
 path.input <- system.file("Input", package="R2GUESS")
-path.output <- tmpdir()
+path.output <- tempdir()
 path.par <- system.file("extdata", package="R2GUESS")
 file.par.Hopx <- "Par_file_example_Hopx.xml"
 print(paste(path.par,file.par.Hopx,sep=""))

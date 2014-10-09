@@ -3,7 +3,7 @@
 \title{Plots the marginal posterior probability of inclusion (MPPI) for each predictor}
 \usage{
   plotMPPI(x, threshold.model = 0.01,
-    threshold.variable = 0.1, Figure = TRUE, cutoff = TRUE)
+    threshold.variable = 0.1, Figure = TRUE, cutoff = TRUE, useMC = FALSE)
 }
 \arguments{
   \item{x}{an object of class \code{ESS}.}
@@ -19,12 +19,16 @@
 
   \item{Figure}{if \code{TRUE} (by default) will generate the MPPI
       plot. If \code{FALSE} only information on the selected predictors
-      will provided.} 
+      will provided.}
 
- \item{cutoff}{if \code{TRUE} (by default) will plot an horizontal line representing the cut-off value indicating by the argument \code{threshold.variable}. If \code{FALSE} the cut-off value is not plotted} 
+  \item{cutoff}{if \code{TRUE} (by default) will plot an horizontal line
+      representing the cut-off value indicating by the argument
+      \code{threshold.variable}. If \code{FALSE} the cut-off value is not
+      plotted.}
+
+  \item{useMC}{if \code{TRUE}, use simple Monte Carlo estimation for the MPPI
+      across all visited models.}
 }
-
-
 
 \value{The \code{plotMPPI} function returns information
   on the best models (i.e. those satisfying the

@@ -41,11 +41,11 @@ if(is.null(time.limit)) option.timelimit <- NULL else option.timelimit <- paste(
 guess.executable <- ifelse(.Platform$OS.type == "unix", "GUESS", "GUESS.exe")
 if(!is.null(path.init)){
 path.init <- path.expand(path.init)
-command <- file.path(ESS.directory, paste(guess.executable, " -X ",path.inputx,dataX," -Y ",path.inputy,dataY, " -par ",path.par,file.par," -init ",path.init,file.init," -nsweep ",nsweep,
-burn.in1, " -out_full ",path.output,root.file.output,top1," -nconf ",conf,cuda1,time1,history1,option.timelimit," -Egam ",Egam," -Sgam ",Sgam," -n_chain ",nb.chain,seed.opt,log1," > ", path.output,file.log,"_log",sep=""))
+command <- file.path(ESS.directory, paste(guess.executable, " -X ",file.path(path.inputx,dataX)," -Y ",file.path(path.inputy,dataY), " -par ",file.path(path.par,file.par)," -init ",file.path(path.init,file.init)," -nsweep ",nsweep,
+burn.in1, " -out_full ",file.path(path.output,root.file.output),top1," -nconf ",conf,cuda1,time1,history1,option.timelimit," -Egam ",Egam," -Sgam ",Sgam," -n_chain ",nb.chain,seed.opt,log1," > ", file.path(path.output,file.log),"_log",sep=""))
 }else{
-command <- file.path(ESS.directory, paste(guess.executable, " -X ",path.inputx,dataX," -Y ",path.inputy,dataY, " -par ",path.par,file.par," -nsweep ",nsweep,
-burn.in1, " -out_full ",path.output,root.file.output,top1," -nconf ",conf,cuda1,time1,history1,option.timelimit," -Egam ",Egam," -Sgam ",Sgam," -n_chain ",nb.chain,seed.opt,log1," > ", path.output,file.log,"_log",sep=""))}
+command <- file.path(ESS.directory, paste(guess.executable, " -X ",file.path(path.inputx,dataX)," -Y ",file.path(path.inputy,dataY), " -par ",file.path(path.par,file.par)," -nsweep ",nsweep,
+burn.in1, " -out_full ",file.path(path.output,root.file.output),top1," -nconf ",conf,cuda1,time1,history1,option.timelimit," -Egam ",Egam," -Sgam ",Sgam," -n_chain ",nb.chain,seed.opt,log1," > ", file.path(path.output,file.log),"_log",sep=""))}
 
 
 print(command)
