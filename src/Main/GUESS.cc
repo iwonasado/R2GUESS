@@ -779,7 +779,7 @@ int main(int argc, char *  argv[])
       }
     }
     cout << "CUDA " << cudaFlag << endl;
-    cout << "No. confounders " << nConfounders << endl;
+    /*cout << "No. confounders " << nConfounders << endl;*/
   }
   cout << "**********************************************************" << endl
        << "**********************************************************" << endl << endl;

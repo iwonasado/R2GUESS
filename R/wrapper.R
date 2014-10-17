@@ -1,6 +1,6 @@
 wrapper <- function(x,root.file.output,object,path.input,path.output,Y=Y,start.counter) {
   number <- x+start.counter-1
-  root.file.output.perm <- file.path(root.file.output,number)
+  root.file.output.perm <- paste(root.file.output,number,sep="")
   if(object$n > 50) indY <- sample(1:object$n,object$n) else{
     cond <- TRUE
     while (cond){

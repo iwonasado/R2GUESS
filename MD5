@@ -1,4 +1,4 @@
-7c91d222880f823e3084df4ef5c82628 *DESCRIPTION
+fa9cc5271542ec4c54292ec5ec57af57 *DESCRIPTION
 acb4062dd45df11741948bba9e0da305 *NAMESPACE
 58cfae7432de383aa06f8bc4fcaf55e0 *R/Analysis.permutation.R
 1a6ad0962eb0c349d0deaa14e8a9aa7e *R/Extend.R2GUESS.R
@@ -26,7 +26,7 @@ efb61d0bf1bcc70ebdec417a8082d216 *R/plotcim.explore.R
 f292411f7b17e3493f4ab298f6f370d2 *R/sample.beta.R
 c98203b5003bf77ed9815411ab91b3b9 *R/summary.ESS.R
 8fc57cfef59d2913e4897afc8af2bd5a *R/summarybest.model.R
-7ac95ee3c87f4b9e40625a2875bc61c5 *R/wrapper.R
+95aaee474223f654d26aac638ebd1583 *R/wrapper.R
 6f161c631bd784cc1d5f7861a74c4e44 *cleanup
 1388a169de62718560070abac725e53b *configure
 4dfd3abbf0fbbbbfb7266a4fa7498489 *configure.ac
@@ -110,7 +110,7 @@ c16de3e2c16ae40011acafd54e2b41a7 *src/Classes/Temperatures.cc
 57f403f81ded47d710b3ca24b822309e *src/Classes/Temperatures.h
 cb77da44b1f19bbed6a466f78ed4a719 *src/Classes/g_AdMH.cc
 bab44666e5cbe24c7131b5da1a66c5d8 *src/Classes/g_AdMH.h
-f0350381748d98ddf8046aa9a712fe25 *src/Main/GUESS.cc
+d8af161876d1d888a4fd375d7696d27c *src/Main/GUESS.cc
 eaf96fa04d3d056d28728a9b29528e44 *src/Makevars.in
 94fc1b401c4a51b75f0d5853d49d16da *src/Makevars.win
 ac650366f3409eed3436d489ca1000bf *src/Routines/cond_post.cc
