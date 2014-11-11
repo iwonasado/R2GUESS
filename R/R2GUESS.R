@@ -126,11 +126,11 @@ if(is.null(time.limit)) option.timelimit <- NULL else option.timelimit <- paste(
 guess.executable <- ifelse(.Platform$OS.type == "unix", "GUESS", "GUESS.exe")
 if(!is.null(path.init)){
 path.init <- path.expand(path.init)
-command <- file.path(ESS.directory, paste(guess.executable, " -X ",file.path(path.input,newdataX)," -Y ",file.path(path.input,newdataY), " -par ",file.path(path.par,file.par)," -init ",file.path(path.init,file.init)," -nsweep ",nsweep,
-burn.in1, " -out_full ",file.path(path.output,root.file.output),top1," -nconf ",confounder,cuda1,time1,history1,option.timelimit," -Egam ",Egam," -Sgam ",Sgam," -n_chain ",nb.chain,seed.opt,log1," > ", file.path(path.output,file.log),"_log",sep=""))
+command <- file.path(ESS.directory, paste(guess.executable, " -X \"",file.path(path.input,newdataX),"\" -Y \"",file.path(path.input,newdataY), "\" -par \"",file.path(path.par,file.par),"\" -init \"",file.path(path.init,file.init),"\" -nsweep ",nsweep,
+burn.in1, " -out_full \"",file.path(path.output,root.file.output),"\" ",top1," -nconf ",confounder,cuda1,time1,history1,option.timelimit," -Egam ",Egam," -Sgam ",Sgam," -n_chain ",nb.chain,seed.opt,log1," > \"", file.path(path.output,file.log),"_log\"",sep=""))
 }else{
-command <- file.path(ESS.directory, paste(guess.executable, " -X ",file.path(path.input,newdataX)," -Y ",file.path(path.input,newdataY), " -par ",file.path(path.par,file.par)," -nsweep ",nsweep,
-burn.in1, " -out_full ",file.path(path.output,root.file.output),top1," -nconf ",confounder,cuda1,time1,history1,option.timelimit," -Egam ",Egam," -Sgam ",Sgam," -n_chain ",nb.chain,seed.opt,log1," > ", file.path(path.output,file.log),"_log",sep=""))}
+command <- file.path(ESS.directory, paste(guess.executable, " -X \"",file.path(path.input,newdataX),"\" -Y \"",file.path(path.input,newdataY), "\" -par \"",file.path(path.par,file.par),"\" -nsweep ",nsweep,
+burn.in1, " -out_full \"",file.path(path.output,root.file.output),"\" ",top1," -nconf ",confounder,cuda1,time1,history1,option.timelimit," -Egam ",Egam," -Sgam ",Sgam," -n_chain ",nb.chain,seed.opt,log1," > \"", file.path(path.output,file.log),"_log\"",sep=""))}
 
 write(command,file=file.path(path.output, paste(root.file.output,"command-C.txt",sep="-")))
 print(command)
